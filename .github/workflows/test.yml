@@ -9,11 +9,15 @@ permissions:
 jobs:
   formula:
     strategy:
+      fail-fast: false
       matrix:
         os: [macos-14, ubuntu-24.04]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - name: Homebrew on PATH (Linux)
+        if: runner.os == 'Linux'
+        run: echo /home/linuxbrew/.linuxbrew/bin >> "$GITHUB_PATH"
       - name: Install from this tap
         run: |
           brew tap-new --no-git local/flight
