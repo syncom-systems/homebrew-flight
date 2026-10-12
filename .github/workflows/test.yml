@@ -29,3 +29,18 @@ jobs:
           brew test local/flight/flight
           flight --version
           tmux -V
+  as-a-user:
+    # The command the README gives, against the published tap and release.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Homebrew on PATH (Linux)
+        if: runner.os == 'Linux'
+        run: echo /home/linuxbrew/.linuxbrew/bin >> "$GITHUB_PATH"
+      - run: |
+          brew install syncom-systems/flight/flight
+          flight --version
+          tmux -V
