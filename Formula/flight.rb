@@ -2,8 +2,9 @@
 class Flight < Formula
   desc "Persistent terminal workspaces for AI coding agents and shells"
   homepage "https://github.com/syncom-systems/flight"
-  version "1.0.0"
   license "MIT"
+
+  depends_on "tmux"
 
   on_macos do
     on_arm do
@@ -18,8 +19,6 @@ class Flight < Formula
       sha256 "5c3c5394145760db711ea6d9967baa6109877b171d5904c1426772c1146f8c21"
     end
   end
-
-  depends_on "tmux"
 
   def install
     bin.install "flight"
