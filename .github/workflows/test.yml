@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: MIT
+name: Test formula
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  formula:
+    strategy:
+      matrix:
+        os: [macos-14, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install from this tap
+        run: |
+          brew tap-new --no-git local/flight
+          cp Formula/flight.rb "$(brew --repository local/flight)/Formula/"
+          brew install --formula local/flight/flight
+      - name: Audit and test
+        run: |
+          brew audit --strict --formula local/flight/flight
+          brew test local/flight/flight
+          flight --version
+          tmux -V
