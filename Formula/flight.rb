@@ -22,7 +22,8 @@ class Flight < Formula
 
   def install
     bin.install "flight"
-    doc.install "README.md", "install.md"
+    doc.install "README.md", "SECURITY.md"
+    doc.install Dir["docs/*.md"]
     pkgshare.install "contrib"
   end
 
