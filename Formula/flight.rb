@@ -8,15 +8,15 @@ class Flight < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/syncom-systems/flight/releases/download/v1.0.0/flight-1.0.0-aarch64-apple-darwin.tar.gz"
-      sha256 "e91378f84147ba182964af71465d902235a4d07b6b75eae1539f3b4803d60d41"
+      url "https://github.com/syncom-systems/flight/releases/download/v1.0.1/flight-1.0.1-aarch64-apple-darwin.tar.gz"
+      sha256 "1df6db3eac94479b27feddd26745bc52f0b1a9144c0ee8c8bf6e387441b9796f"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/syncom-systems/flight/releases/download/v1.0.0/flight-1.0.0-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "5c3c5394145760db711ea6d9967baa6109877b171d5904c1426772c1146f8c21"
+      url "https://github.com/syncom-systems/flight/releases/download/v1.0.1/flight-1.0.1-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "e391b9c28e76cbc7ded52a47d2067b9fed28117aa4be718268f4a8d90c76c095"
     end
   end
 
