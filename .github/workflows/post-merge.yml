@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: MIT
+# Post-merge: the command the README gives, against the published tap and release. It does not
+# repeat the formula checks that pre-merge already ran on this change. Public repository, so
+# this runs on GitHub-hosted runners.
+name: post-merge
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  as-a-user:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Homebrew on PATH (Linux)
+        if: runner.os == 'Linux'
+        run: echo /home/linuxbrew/.linuxbrew/bin >> "$GITHUB_PATH"
+      - run: |
+          brew install syncom-systems/flight/flight
+          flight --version
+          tmux -V
