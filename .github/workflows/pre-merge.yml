@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
-name: Test formula
+# Pre-merge: the formula in this change installs, audits and tests. Public repository, so
+# this runs on GitHub-hosted runners. The published tap is checked after merge, in post-merge.
+name: pre-merge
 on:
   pull_request:
-  push:
-    branches: [main]
 permissions:
   contents: read
 jobs:
@@ -27,20 +27,5 @@ jobs:
         run: |
           brew audit --strict --formula local/flight/flight
           brew test local/flight/flight
-          flight --version
-          tmux -V
-  as-a-user:
-    # The command the README gives, against the published tap and release.
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-14, ubuntu-24.04]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Homebrew on PATH (Linux)
-        if: runner.os == 'Linux'
-        run: echo /home/linuxbrew/.linuxbrew/bin >> "$GITHUB_PATH"
-      - run: |
-          brew install syncom-systems/flight/flight
           flight --version
           tmux -V
